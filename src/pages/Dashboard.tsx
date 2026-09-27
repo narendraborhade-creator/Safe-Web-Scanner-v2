@@ -11,9 +11,7 @@ import ScoreRing from '../components/ScoreRing';
 import Navbar, { TabType } from '../components/Navbar';
 import Glossary from '../components/Glossary';
 import SiteComparison, { ScanResult } from '../components/SiteComparison';
-
-
-const API_BASE = '/api';
+import { API_BASE } from '../utils/api';
 
 type ScanHistoryItem = {
   _id: string;

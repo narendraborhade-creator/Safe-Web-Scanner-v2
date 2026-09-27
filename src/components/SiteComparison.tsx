@@ -6,6 +6,7 @@ import {
   Layers, ExternalLink, ArrowUpRight, BarChart3
 } from 'lucide-react';
 import ScoreRing from './ScoreRing';
+import { API_BASE } from '../utils/api';
 
 export interface ScanResult {
   url: string;
@@ -68,8 +69,6 @@ export interface CompareResult {
 interface SiteComparisonProps {
   token: string | null;
 }
-
-const API_BASE = '/api';
 
 const PRESET_COMPARISONS = [
   {
