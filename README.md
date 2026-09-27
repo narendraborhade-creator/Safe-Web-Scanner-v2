@@ -1,124 +1,190 @@
 # SafeWeb Inspector & Comparator 🛡️⚡
 
-A modern web safety inspection and comparison platform featuring a **futuristic 3D cyber UI**, **user authentication**, **MongoDB database integration**, and a cleanly **separated frontend/backend architecture**.
+> A modern web safety inspection and comparison platform for evaluating website security signals through a futuristic 3D cyber interface.
+
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
+SafeWeb Inspector & Comparator combines a decoupled React frontend with a Node.js/Express backend to inspect website safety indicators, compare domains, and maintain authenticated scan history.
+
+> **Note:** This tool is intended to support security awareness and preliminary analysis. It should not replace a professional security audit.
 
 ---
 
-## 🌟 Key Features
+## ✨ Features
 
-- 🌌 **Futuristic 3D UI**: Interactive 3D particle mesh background reacting to cursor physics, glowing glassmorphism cards, animated score rings, and neon cyber aesthetics.
-- 🔐 **Authentication & Security**: User registration, login with bcrypt password hashing, and JWT token authentication.
-- 🍃 **MongoDB Integration**: Stores registered user profiles, authentication credentials, and persistent scan/comparison history.
-- 🔍 **Single Site Safety Scanner**: Analyzes TLS/SSL certificates, HTTP security headers (CSP, HSTS, X-Frame-Options), DNS infrastructure, and potential phishing/typosquatting signals.
-- ⚖️ **Side-by-Side Comparator**: Compares two websites head-to-head to determine the safer domain with granular score differentials.
-- 📜 **Scan History**: Review past security audits and comparisons for your account.
+- **Futuristic 3D interface** — Interactive particle-mesh background, glassmorphism cards, animated score rings, and neon cyber styling.
+- **Authentication and security** — Registration and login with bcrypt password hashing and JWT-based authentication.
+- **MongoDB persistence** — Stores user profiles, authentication data, and scan/comparison history.
+- **Single-site scanner** — Reviews TLS/SSL certificates, HTTP security headers, DNS infrastructure, and potential phishing or typosquatting signals.
+- **Website comparator** — Compares two websites side by side and highlights score differences to identify the safer domain.
+- **Scan history** — Lets authenticated users review previous security checks and comparisons.
 
 ---
 
-## 🏗️ Architecture
+## 🧱 Architecture
 
-The project is structured with a decoupled Frontend and Backend:
+The project uses a decoupled frontend and backend structure:
 
-```
-safeweb-inspector-&-comparator/
-├── backend/                  # Node.js + Express + TypeScript Backend
+```text
+Safe-Web-Scanner-v2/
+├── backend/                    # Node.js + Express + TypeScript API
 │   ├── config/
-│   │   └── db.ts             # MongoDB Mongoose Connection
+│   │   └── db.ts               # MongoDB/Mongoose connection
 │   ├── middleware/
-│   │   └── auth.ts           # JWT Authentication Middleware
+│   │   └── auth.ts             # JWT authentication middleware
 │   ├── models/
-│   │   ├── User.ts           # User Mongoose Schema
-│   │   └── ScanHistory.ts    # Scan History Schema
+│   │   ├── User.ts             # User schema
+│   │   └── ScanHistory.ts      # Scan history schema
 │   ├── routes/
-│   │   ├── auth.ts           # Registration & Login Endpoints
-│   │   └── scan.ts           # Site Scan & Compare Endpoints
-│   ├── .env.example          # Backend Environment Template
-│   ├── package.json          # Backend Dependencies
-│   ├── server.ts             # Express Server Entrypoint
-│   └── tsconfig.json         # Backend TypeScript Configuration
+│   │   ├── auth.ts             # Registration and login endpoints
+│   │   └── scan.ts             # Scan and comparison endpoints
+│   ├── .env.example             # Backend environment template
+│   ├── package.json             # Backend dependencies and scripts
+│   ├── server.ts                # Express server entry point
+│   └── tsconfig.json            # Backend TypeScript configuration
 │
-├── src/                      # React 19 + TypeScript + Tailwind Frontend
+├── src/                         # React + TypeScript frontend
 │   ├── components/
-│   │   ├── Navbar.tsx        # Cyberpunk Glassmorphic Navbar
-│   │   ├── ParticleField.tsx # Interactive 3D Particle Canvas
-│   │   └── ScoreRing.tsx     # Animated SVG Score Ring
+│   │   ├── Navbar.tsx           # Glassmorphic navigation bar
+│   │   ├── ParticleField.tsx    # Interactive 3D particle canvas
+│   │   └── ScoreRing.tsx         # Animated SVG score ring
 │   ├── context/
-│   │   └── AuthContext.tsx   # React Auth State Provider
+│   │   └── AuthContext.tsx      # Authentication state provider
 │   ├── pages/
-│   │   ├── Dashboard.tsx     # Scan, Compare, and History Dashboard
-│   │   └── LoginPage.tsx     # Futuristic Auth Portal (Sign In / Register)
-│   ├── App.tsx               # Root App Routing
-│   ├── index.css             # Cyberpunk Theme & Neon Glow CSS
-│   └── main.tsx              # React Entry Point
+│   │   ├── Dashboard.tsx        # Scan, compare, and history dashboard
+│   │   └── LoginPage.tsx        # Sign-in and registration portal
+│   ├── App.tsx                  # Root application component
+│   ├── index.css                # Cyberpunk theme and neon styles
+│   └── main.tsx                 # React entry point
 │
-├── index.html                # HTML Template
-├── package.json              # Frontend Dependencies & Scripts
-├── tsconfig.json             # Frontend TypeScript Configuration
-└── vite.config.ts            # Vite Configuration with Backend API Proxy
+├── index.html                   # HTML template
+├── package.json                 # Frontend dependencies and scripts
+├── tsconfig.json                # Frontend TypeScript configuration
+└── vite.config.ts               # Vite configuration and API proxy
 ```
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Getting Started
 
-### 1. Prerequisites
+### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- [MongoDB](https://www.mongodb.com/) (running locally or MongoDB Atlas connection string)
+- [Node.js](https://nodejs.org/) v18 or higher
+- [MongoDB](https://www.mongodb.com/) running locally or a MongoDB Atlas connection string
+- npm
 
-### 2. Backend Setup
+### 1. Clone the repository
 
-1. Open a terminal in the project directory:
-   ```bash
-   cd backend
-   ```
-2. Configure your environment variables in `backend/.env`:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/safeweb
-   JWT_SECRET=your_custom_jwt_secret_key
-   PORT=5000
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the backend development server:
-   ```bash
-   npm run dev
-   ```
-   *The backend API will run at `http://localhost:5000`.*
+```bash
+git clone https://github.com/narendraborhade-creator/Safe-Web-Scanner-v2.git
+cd Safe-Web-Scanner-v2
+```
 
-### 3. Frontend Setup
+### 2. Configure and start the backend
 
-1. Open a second terminal in the project root:
-   ```bash
-   npm install
-   ```
-2. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
-3. Open `http://localhost:5173` in your browser.
+Create `backend/.env` using the following values as a starting point:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/safeweb
+JWT_SECRET=your_custom_jwt_secret_key
+PORT=5000
+```
+
+Then install dependencies and start the API:
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+The backend API will be available at `http://localhost:5000`.
+
+### 3. Start the frontend
+
+Open a second terminal from the project root:
+
+```bash
+cd Safe-Web-Scanner-v2
+npm install
+npm run dev
+```
+
+Open the local URL shown by Vite, typically `http://localhost:5173`.
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Reference
 
 ### Authentication
-- `POST /api/auth/register` — Create a new account (`username`, `email`, `password`)
-- `POST /api/auth/login` — Authenticate user and obtain JWT token (`email`, `password`)
-- `GET /api/auth/me` — Fetch currently authenticated user profile *(Protected)*
 
-### Scanning & Comparison
-- `POST /api/scan/check-site` — Audit safety metrics for a given URL *(Protected)*
-- `POST /api/scan/compare-sites` — Compare safety metrics of two URLs *(Protected)*
-- `GET /api/scan/history` — Retrieve user's scan history *(Protected)*
-- `GET /api/scan/samples` — Retrieve preset safe and suspicious samples *(Public)*
+| Method | Endpoint | Description | Access |
+| --- | --- | --- | --- |
+| `POST` | `/api/auth/register` | Create an account with `username`, `email`, and `password` | Public |
+| `POST` | `/api/auth/login` | Authenticate with `email` and `password` | Public |
+| `GET` | `/api/auth/me` | Fetch the authenticated user profile | Protected |
+
+### Scanning and comparison
+
+| Method | Endpoint | Description | Access |
+| --- | --- | --- | --- |
+| `POST` | `/api/scan/check-site` | Analyze safety metrics for a URL | Protected |
+| `POST` | `/api/scan/compare-sites` | Compare safety metrics for two URLs | Protected |
+| `GET` | `/api/scan/history` | Retrieve the user's scan history | Protected |
+| `GET` | `/api/scan/samples` | Retrieve safe and suspicious sample URLs | Public |
+
+Protected endpoints require a valid JWT authentication token.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 19, TypeScript, Tailwind CSS v4, Lucide React, HTML5 3D Canvas
-- **Backend**: Node.js, Express, TypeScript, TSX
-- **Database & Auth**: MongoDB, Mongoose, JSON Web Tokens (JWT), bcryptjs
+### Frontend
+
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Lucide React
+- HTML5 Canvas for 3D visual effects
+- Vite
+
+### Backend
+
+- Node.js
+- Express
+- TypeScript
+- TSX
+
+### Database and authentication
+
+- MongoDB
+- Mongoose
+- JSON Web Tokens (JWT)
+- bcryptjs
+
+---
+
+## 🤝 Contributing
+
+Contributions, ideas, and improvements are welcome. To contribute:
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
+3. Commit your changes with a clear message.
+4. Push the branch and open a pull request.
+
+Please keep changes focused and include relevant documentation when adding or changing functionality.
+
+### Contributors
+
+- [@narendraborhade-creator](https://github.com/narendraborhade-creator)
+- [@AdityaGaikwad03](https://github.com/AdityaGaikwad03)
+
+---
+
+## 📄 License
+
+No license has been specified yet. Add a license file if you intend to define terms for using, modifying, or distributing this project.
