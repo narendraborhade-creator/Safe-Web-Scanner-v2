@@ -1,9 +1,8 @@
 {
   "framework": "vite",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+  "functions": {
+    "api/[...path].ts": {
+      "maxDuration": 60
     }
-  ]
+  }
 }

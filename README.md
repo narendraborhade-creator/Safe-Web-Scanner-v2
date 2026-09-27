@@ -117,13 +117,12 @@ Open the local URL shown by Vite, typically `http://localhost:5173`.
 
 ## Deploying to Vercel
 
-The frontend deploys to Vercel as a Vite static site. The Express backend must be deployed as a separate Node service because it requires a persistent HTTP server and MongoDB connection.
+The frontend and Express API deploy together on Vercel. The API runs as a serverless function under `/api` and connects to MongoDB on demand.
 
 1. Import the repository into Vercel. Use `npm run build` as the build command and `dist` as the output directory.
-2. Deploy the `backend` directory to a Node host that supports Express, such as Render, Railway, or Fly.io.
-3. Set `VITE_API_URL` in the Vercel project to the backend API URL, including `/api`, for example `https://your-backend.example.com/api`.
-4. Set `MONGODB_URI`, `JWT_SECRET`, and `FRONTEND_URL` in the backend service. `FRONTEND_URL` must be the Vercel site URL, such as `https://your-app.vercel.app`.
-5. Redeploy the Vercel project after saving the environment variable.
+2. In Vercel project settings, add `MONGODB_URI` and a secure `JWT_SECRET` for Production, Preview, and Development as needed.
+3. Leave `VITE_API_URL` empty when the API is deployed with the same Vercel project; the frontend will use the same-origin `/api` routes.
+4. Redeploy after saving the environment variables.
 
 ---
 
