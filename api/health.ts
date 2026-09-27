@@ -1,3 +1,7 @@
-import { createVercelHandler } from '../backend/vercelHandler';
-
-export default createVercelHandler('/api/health');
+export default function handler(_request: any, response: any) {
+	response.status(200).json({
+		status: 'ok',
+		database: 'serverless',
+		timestamp: new Date().toISOString(),
+	});
+}
