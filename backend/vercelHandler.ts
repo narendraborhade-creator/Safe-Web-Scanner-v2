@@ -9,8 +9,15 @@ export function createVercelHandler(routePath: string, requiresDatabase = false)
     appPromise ??= import('./server').then(({ app }) => app);
 
     if (requiresDatabase) {
-      databaseConnection ??= connectDB();
-      await databaseConnection;
+      try {
+        databaseConnection ??= connectDB();
+        await databaseConnection;
+      } catch (error) {
+        databaseConnection = undefined;
+        const message = error instanceof Error ? error.message : 'Database connection failed';
+        response.status(503).json({ message });
+        return;
+      }
     }
 
     const query = request.url?.includes('?') ? request.url.slice(request.url.indexOf('?')) : '';

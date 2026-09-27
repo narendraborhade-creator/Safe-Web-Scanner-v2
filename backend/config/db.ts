@@ -5,10 +5,12 @@ export const connectDB = async (): Promise<void> => {
     const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/safeweb';
     const conn = await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000,
+      bufferCommands: false,
     });
     console.log(`[MongoDB] Connected successfully: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`[MongoDB] Connection error: ${(error as Error).message}`);
-    console.log(`[MongoDB] Ensure MongoDB is running locally or check MONGODB_URI in backend/.env`);
+    const message = error instanceof Error ? error.message : 'Unknown database connection error';
+    console.error(`[MongoDB] Connection error: ${message}`);
+    throw new Error(`Database connection failed: ${message}`);
   }
 };
