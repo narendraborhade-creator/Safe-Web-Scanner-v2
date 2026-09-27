@@ -1,3 +1,3 @@
 import { createVercelHandler } from '../../backend/vercelHandler';
 
-export default createVercelHandler('/api/scan/history');
+export default createVercelHandler('/api/scan/history', true);

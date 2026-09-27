@@ -1,3 +1,3 @@
 import { createVercelHandler } from '../../backend/vercelHandler';
 
-export default createVercelHandler('/api/auth/register');
+export default createVercelHandler('/api/auth/register', true);
